@@ -1,0 +1,89 @@
+
+/**
+ * 
+ * @author charlie
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml")
+public class Demo {
+
+  @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)  
+  public FlexoConceptInstanceType<Directory> root;
+
+  @CreationScheme  
+  Demo:create() {  
+    root = Directory.create();    
+    root.name = "[root]";  
+  }  
+
+  @DeletionScheme  
+  Void delete() {  
+  
+  }  
+
+
+  @FlexoConcept  
+  public class Directory extends Element  {  
+  
+    @FlexoConceptInstanceRole(cardinality=ZeroMany,readOnly=false)    
+    public List<FlexoConceptInstanceType<Element>> children;  
+  
+    @CreationScheme    
+    Directory:create() {    
+      name = "newDirectory";      
+      children = new ArrayList<FlexoConceptInstance>();    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+    @ActionScheme    
+    public FlexoConceptInstanceType<File> addFile() {    
+      FlexoConceptInstanceType<File> result = File.create();      
+      children.add(result)      
+      return result;    
+    }    
+  
+    @ActionScheme    
+    public FlexoConceptInstanceType<Directory> addDirectory() {    
+      FlexoConceptInstanceType<Directory> result = Directory.create();      
+      children.add(result)      
+      return result;    
+    }    
+  
+    @ActionScheme    
+    public Void deleteElement(FlexoConceptInstanceType<Element> element) {    
+      children.remove(parameters.element)      
+      delete parameters.element    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Element {  
+  
+    @PrimitiveRole(cardinality=ZeroOne,readOnly=false)    
+    public String name;  
+  }  
+
+  @FlexoConcept  
+  public class File extends Element  {  
+  
+    @PrimitiveRole(cardinality=ZeroOne,readOnly=false)    
+    public String icon;  
+  
+    @CreationScheme    
+    File:create() {    
+      name = "newFile";    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+  }  
+
+}

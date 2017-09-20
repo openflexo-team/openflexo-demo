@@ -1,0 +1,51 @@
+group 'org.openflexo.demo'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.openflexo_version = '1.9.0-SNAPSHOT'
+}
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url "https://maven.openflexo.org/artifactory/openflexo-deps/" }
+}
+
+dependencies {
+    // dependency to the server
+   compile "org.openflexo:http-server:${openflexo_version}"
+ 
+    // set of connectors
+    compile "org.openflexo:docxconnector:${openflexo_version}"
+    compile "org.openflexo:excelconnector:${openflexo_version}"
+    compile "org.openflexo:pdfconnector:${openflexo_version}"
+    compile "org.openflexo:ginaconnector:${openflexo_version}"
+ 
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+def appDir = file(buildDir.canonicalPath + "/app");
+
+task cleanApp(group: "deployement" ) {
+    doLast {
+        if (appDir.exists()) {
+            appDir.deleteDir();
+        }
+    }
+}
+
+task copyWebResources(type: Copy) {
+    from "webroot"
+    into appDir.canonicalPath + "/webroot"
+}
+
+task copyJars (type: Copy, group: "deployement") {
+    from configurations.runtime.resolve()
+    into appDir.canonicalPath + "/libs"
+}
+
+task deploy (dependsOn: ["cleanApp", "copyJars", "copyWebResources"], group: "deployement") {
+}
