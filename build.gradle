@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext.openflexo_version = '1.9.0-SNAPSHOT'
+    ext.destination = "/home/openflexoserver"
 }
 
 apply plugin: 'java'
@@ -37,6 +38,11 @@ task cleanApp(group: "deployement" ) {
     }
 }
 
+task copyProject(type: Copy) {
+    from "demo.prj"
+    into appDir.canonicalPath + "/demo.prj"
+}
+
 task copyWebResources(type: Copy) {
     from "webroot"
     into appDir.canonicalPath + "/webroot"
@@ -47,5 +53,10 @@ task copyJars (type: Copy, group: "deployement") {
     into appDir.canonicalPath + "/libs"
 }
 
-task deploy (dependsOn: ["cleanApp", "copyJars", "copyWebResources"], group: "deployement") {
+task sync (type: Sync, group: "deployement") {
+    from appDir.canonicalPath
+    into destination
+}
+
+task deploy (dependsOn: ["cleanApp", "copyJars", "copyProject", "copyWebResources", "sync"], group: "deployement") {
 }
