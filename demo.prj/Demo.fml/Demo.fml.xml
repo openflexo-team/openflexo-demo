@@ -76,9 +76,14 @@
     <PrimitiveRole id="CHA-80" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="CHA" flexoID="80" />
     <CreationScheme id="CHA-30" name="create" width="800" label="create" height="600" userID="CHA" flexoID="30">
       <BehaviourControlGraph_Sequence id="CHA-129" userID="CHA" flexoID="129">
-        <ControlGraph2_AssignationAction id="CHA-128" assign="parent" ownerContext="controlGraph2" userID="CHA" flexoID="128">
-          <AssignableAction_ExpressionAction id="CHA-127" expression="parameters.parent" userID="CHA" flexoID="127" />
-        </ControlGraph2_AssignationAction>
+        <ControlGraph2_Sequence id="CHA-157" ownerContext="controlGraph2" userID="CHA" flexoID="157">
+          <ControlGraph2_AssignationAction id="CHA-128" assign="parent" ownerContext="controlGraph2" userID="CHA" flexoID="128">
+            <AssignableAction_ExpressionAction id="CHA-127" expression="parameters.parent" userID="CHA" flexoID="127" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="CHA-155" assign="icon" ownerContext="controlGraph1" userID="CHA" flexoID="155">
+            <AssignableAction_ExpressionAction id="CHA-156" expression="&quot;portrait&quot;" userID="CHA" flexoID="156" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="CHA-50" assign="name" ownerContext="controlGraph1" userID="CHA" flexoID="50">
           <AssignableAction_ExpressionAction id="CHA-49" expression="&quot;newFile&quot;" userID="CHA" flexoID="49" />
         </ControlGraph1_AssignationAction>

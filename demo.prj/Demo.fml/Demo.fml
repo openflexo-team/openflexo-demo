@@ -87,6 +87,7 @@ public class Demo {
     @CreationScheme    
     File:create(FlexoConceptInstanceType<Directory> parent) {    
       name = "newFile";      
+      icon = "portrait";      
       parent = parameters.parent;    
     }    
   
