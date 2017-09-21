@@ -45,7 +45,7 @@ task copyProject(type: Copy, group: "deployement") {
 
 
 task copyBinary(type: Copy, group: "deployement") {
-    from "deploy/start.sh"
+    from "deploy"
     into appDir.canonicalPath
 }
 
@@ -64,7 +64,7 @@ task sync (type: Sync, group: "deployement") {
     into destination
 }
 
-task copy (dependsOn: ["cleanApp", "assemble", "copyJars", "copyProject", "copyWebResources"], group: "deployement") {
+task copy (dependsOn: ["cleanApp", "assemble", "copyJars", "copyProject", "copyBinary", "copyWebResources"], group: "deployement") {
 
 }
 
