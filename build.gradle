@@ -64,9 +64,22 @@ task sync (type: Sync, group: "deployement") {
     into destination
 }
 
-task copy (dependsOn: ["cleanApp", "assemble", "copyJars", "copyProject", "copyBinary", "copyWebResources"], group: "deployement") {
-
+task copy (dependsOn: [
+        "cleanApp", "assemble", "copyJars", "copyProject",
+        "copyBinary", "copyWebResources"
+    ], group: "deployement") {
 }
 
-task deploy (dependsOn: ["copy", "sync"], group: "deployement") {
+task stopApp(type: Exec, group: "deployement") {
+    commandLine "./stop.sh"
+}
+
+task startApp(type: Exec, group: "deployement") {
+    commandLine "./start.sh"
+}
+
+task deploy (
+    dependsOn: ["copy", "stopApp", "sync", "startApp"],
+    group: "deployement"
+) {
 }
