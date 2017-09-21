@@ -72,10 +72,12 @@ task copy (dependsOn: [
 
 task stopApp(type: Exec, group: "deployement") {
     commandLine "./stop.sh"
+    workingDir destination
 }
 
 task startApp(type: Exec, group: "deployement") {
     commandLine "./start.sh"
+    workingDir destination
 }
 
 task deploy (
