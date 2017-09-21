@@ -38,12 +38,18 @@ task cleanApp(group: "deployement" ) {
     }
 }
 
-task copyProject(type: Copy) {
+task copyProject(type: Copy, group: "deployement") {
     from "demo.prj"
     into appDir.canonicalPath + "/demo.prj"
 }
 
-task copyWebResources(type: Copy) {
+
+task copyBinary(type: Copy, group: "deployement") {
+    from "deploy/start.sh"
+    into appDir.canonicalPath
+}
+
+task copyWebResources(type: Copy, group: "deployement") {
     from "webroot"
     into appDir.canonicalPath + "/webroot"
 }
@@ -58,5 +64,9 @@ task sync (type: Sync, group: "deployement") {
     into destination
 }
 
-task deploy (dependsOn: ["cleanApp", "copyJars", "copyProject", "copyWebResources", "sync"], group: "deployement") {
+task copy (dependsOn: ["cleanApp", "assemble", "copyJars", "copyProject", "copyWebResources"], group: "deployement") {
+
+}
+
+task deploy (dependsOn: ["copy", "sync"], group: "deployement") {
 }
