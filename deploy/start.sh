@@ -6,6 +6,6 @@ LOGFILE=server.log
 echo "Starting server"
 
 nohup \
-    java -cp `find libs | xargs | sed "s/ /:/g"` org.openflexo.http.server.OpenFlexoServer --port 9300 --project demo.prj 1>&2 $LOGFILE \
+    java -cp `find libs | xargs | sed "s/ /:/g"` org.openflexo.http.server.OpenFlexoServer --port 9300 --project demo.prj > $LOGFILE \
     & echo $! > $PIDFILE
 
