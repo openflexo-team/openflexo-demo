@@ -2,52 +2,63 @@
 <VirtualModel id="CHA-2" modelVersion="2.0" uri="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml" version="0.1" isAbstract="true" name="Demo" author="charlie" userID="CHA" flexoID="2">
   <FlexoConcept id="CHA-11" parentFlexoConceptsList="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Element" name="Directory" author="charlie" userID="CHA" flexoID="11">
     <Inspector id="CHA-6" renderer="(&quot;Directory &quot; + name)" inspectorTitle="Directory" userID="CHA" flexoID="6" />
-    <FlexoConceptInstanceRole id="CHA-84" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Element" cloningStrategy="Reference" cardinality="ZeroMany" name="children" userID="CHA" flexoID="84" />
     <CreationScheme id="CHA-8" name="create" width="800" label="create" height="600" userID="CHA" flexoID="8">
       <BehaviourControlGraph_Sequence id="CHA-89" userID="CHA" flexoID="89">
-        <ControlGraph2_AssignationAction id="CHA-88" assign="children" ownerContext="controlGraph2" userID="CHA" flexoID="88">
-          <AssignableAction_AddClassInstance id="CHA-87" type="java.util.ArrayList&lt;org.openflexo.foundation.fml.rt.FlexoConceptInstance&gt;" userID="CHA" flexoID="87" />
+        <ControlGraph2_AssignationAction id="CHA-118" assign="parent" ownerContext="controlGraph2" userID="CHA" flexoID="118">
+          <AssignableAction_ExpressionAction id="CHA-117" expression="parameters.parent" userID="CHA" flexoID="117" />
         </ControlGraph2_AssignationAction>
         <ControlGraph1_AssignationAction id="CHA-45" assign="name" ownerContext="controlGraph1" userID="CHA" flexoID="45">
           <AssignableAction_ExpressionAction id="CHA-44" expression="&quot;newDirectory&quot;" userID="CHA" flexoID="44" />
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="CHA-123" isRequired="true" widget="CUSTOM_WIDGET" name="parent" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory&gt;" userID="CHA" flexoID="123" />
     </CreationScheme>
     <DeletionScheme id="CHA-10" name="delete" width="800" label="delete" height="600" userID="CHA" flexoID="10">
       <BehaviourControlGraph_EmptyControlGraph id="CHA-9" userID="CHA" flexoID="9" />
     </DeletionScheme>
     <ActionScheme id="CHA-34" visibility="Public" name="addFile" width="800" label="addFile" height="600" userID="CHA" flexoID="34">
       <BehaviourControlGraph_Sequence id="CHA-51" userID="CHA" flexoID="51">
-        <ControlGraph2_Sequence id="CHA-90" ownerContext="controlGraph2" userID="CHA" flexoID="90">
+        <ControlGraph2_Sequence id="CHA-142" ownerContext="controlGraph2" userID="CHA" flexoID="142">
           <ControlGraph2_ReturnStatement id="CHA-43" ownerContext="controlGraph2" userID="CHA" flexoID="43">
             <AssignableAction_ExpressionAction id="CHA-42" expression="result" userID="CHA" flexoID="42" />
           </ControlGraph2_ReturnStatement>
-          <ControlGraph1_ExpressionAction id="CHA-85" expression="children.add(result)" ownerContext="controlGraph1" userID="CHA" flexoID="85" />
+          <ControlGraph1_NotifyPropertyChangedAction id="CHA-140" propertyName="getChildren()" object="this" ownerContext="controlGraph1" userID="CHA" flexoID="140" />
         </ControlGraph2_Sequence>
         <ControlGraph1_DeclarationAction id="CHA-38" variable="result" ownerContext="controlGraph1" userID="CHA" flexoID="38">
-          <AssignableAction_AddFlexoConceptInstance id="CHA-37" container="this" creationSchemeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File.create" receiver="container" userID="CHA" flexoID="37" />
+          <AssignableAction_AddFlexoConceptInstance id="CHA-37" container="this" creationSchemeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File.create" receiver="container" userID="CHA" flexoID="37">
+            <AddFlexoConceptInstanceParameter id="CHA-131" paramName="parent" value="this" userID="CHA" flexoID="131" />
+          </AssignableAction_AddFlexoConceptInstance>
         </ControlGraph1_DeclarationAction>
       </BehaviourControlGraph_Sequence>
     </ActionScheme>
     <ActionScheme id="CHA-63" visibility="Public" name="addDirectory" width="800" label="addDirectory" height="600" userID="CHA" flexoID="63">
       <BehaviourControlGraph_Sequence id="CHA-71" userID="CHA" flexoID="71">
-        <ControlGraph2_Sequence id="CHA-93" ownerContext="controlGraph2" userID="CHA" flexoID="93">
+        <ControlGraph2_Sequence id="CHA-143" ownerContext="controlGraph2" userID="CHA" flexoID="143">
           <ControlGraph2_ReturnStatement id="CHA-70" ownerContext="controlGraph2" userID="CHA" flexoID="70">
             <AssignableAction_ExpressionAction id="CHA-69" expression="result" userID="CHA" flexoID="69" />
           </ControlGraph2_ReturnStatement>
-          <ControlGraph1_ExpressionAction id="CHA-91" expression="children.add(result)" ownerContext="controlGraph1" userID="CHA" flexoID="91" />
+          <ControlGraph1_NotifyPropertyChangedAction id="CHA-139" propertyName="getChildren()" object="this" ownerContext="controlGraph1" userID="CHA" flexoID="139" />
         </ControlGraph2_Sequence>
         <ControlGraph1_DeclarationAction id="CHA-68" variable="result" ownerContext="controlGraph1" userID="CHA" flexoID="68">
-          <AssignableAction_AddFlexoConceptInstance id="CHA-67" container="this" creationSchemeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory.create" receiver="container" userID="CHA" flexoID="67" />
+          <AssignableAction_AddFlexoConceptInstance id="CHA-67" container="this" creationSchemeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory.create" receiver="container" userID="CHA" flexoID="67">
+            <AddFlexoConceptInstanceParameter id="CHA-120" paramName="parent" value="this" userID="CHA" flexoID="120" />
+          </AssignableAction_AddFlexoConceptInstance>
         </ControlGraph1_DeclarationAction>
       </BehaviourControlGraph_Sequence>
     </ActionScheme>
     <ActionScheme id="CHA-73" visibility="Public" name="deleteElement" width="800" label="deleteElement" height="600" userID="CHA" flexoID="73">
-      <BehaviourControlGraph_Sequence id="CHA-94" userID="CHA" flexoID="94">
-        <ControlGraph2_DeleteFlexoConceptInstance id="CHA-78" deletionSchemeURI="null.null" object="parameters.element" ownerContext="controlGraph2" userID="CHA" flexoID="78" />
-        <ControlGraph1_ExpressionAction id="CHA-92" expression="children.remove(parameters.element)" ownerContext="controlGraph1" userID="CHA" flexoID="92" />
+      <BehaviourControlGraph_Sequence id="CHA-144" ownerContext="controlGraph2" userID="CHA" flexoID="144">
+        <ControlGraph2_NotifyPropertyChangedAction id="CHA-141" propertyName="getChildren()" object="this" ownerContext="controlGraph2" userID="CHA" flexoID="141" />
+        <ControlGraph1_DeleteFlexoConceptInstance id="CHA-78" deletionSchemeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Element.delete" object="parameters.element" ownerContext="controlGraph1" userID="CHA" flexoID="78" />
       </BehaviourControlGraph_Sequence>
       <GenericBehaviourParameter id="CHA-79" isRequired="true" widget="CUSTOM_WIDGET" name="element" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Element&gt;" userID="CHA" flexoID="79" />
+    </ActionScheme>
+    <ActionScheme id="CHA-132" name="getChildren" width="800" label="getChildren" height="600" userID="CHA" flexoID="132">
+      <BehaviourControlGraph_ReturnStatement id="CHA-137" userID="CHA" flexoID="137">
+        <AssignableAction_SelectFlexoConceptInstance id="CHA-135" container="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Element" receiver="container" userID="CHA" flexoID="135">
+          <Condition id="CHA-136" condition="(selected.parent = this)" userID="CHA" flexoID="136" />
+        </AssignableAction_SelectFlexoConceptInstance>
+      </BehaviourControlGraph_ReturnStatement>
     </ActionScheme>
   </FlexoConcept>
   <FlexoConcept id="CHA-21" isAbstract="true" name="Element" author="charlie" userID="CHA" flexoID="21">
@@ -55,14 +66,24 @@
       <InspectorEntry id="CHA-95" widget="CUSTOM_WIDGET" data="name" name="Name" label="Name" type="java.lang.String" userID="CHA" flexoID="95" />
     </Inspector>
     <PrimitiveRole id="CHA-15" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="name" userID="CHA" flexoID="15" />
+    <FlexoConceptInstanceRole id="CHA-113" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory" cloningStrategy="Reference" cardinality="One" name="parent" userID="CHA" flexoID="113" />
+    <DeletionScheme id="CHA-105" name="delete" width="800" label="delete" height="600" userID="CHA" flexoID="105">
+      <BehaviourControlGraph_EmptyControlGraph id="CHA-106" userID="CHA" flexoID="106" />
+    </DeletionScheme>
   </FlexoConcept>
   <FlexoConcept id="CHA-33" parentFlexoConceptsList="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Element" name="File" author="charlie" userID="CHA" flexoID="33">
     <Inspector id="CHA-28" renderer="(&quot;File &quot; + name)" inspectorTitle="File" userID="CHA" flexoID="28" />
     <PrimitiveRole id="CHA-80" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="CHA" flexoID="80" />
     <CreationScheme id="CHA-30" name="create" width="800" label="create" height="600" userID="CHA" flexoID="30">
-      <BehaviourControlGraph_AssignationAction id="CHA-50" assign="name" userID="CHA" flexoID="50">
-        <AssignableAction_ExpressionAction id="CHA-49" expression="&quot;newFile&quot;" userID="CHA" flexoID="49" />
-      </BehaviourControlGraph_AssignationAction>
+      <BehaviourControlGraph_Sequence id="CHA-129" userID="CHA" flexoID="129">
+        <ControlGraph2_AssignationAction id="CHA-128" assign="parent" ownerContext="controlGraph2" userID="CHA" flexoID="128">
+          <AssignableAction_ExpressionAction id="CHA-127" expression="parameters.parent" userID="CHA" flexoID="127" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="CHA-50" assign="name" ownerContext="controlGraph1" userID="CHA" flexoID="50">
+          <AssignableAction_ExpressionAction id="CHA-49" expression="&quot;newFile&quot;" userID="CHA" flexoID="49" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="CHA-130" isRequired="true" widget="CUSTOM_WIDGET" name="parent" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory&gt;" userID="CHA" flexoID="130" />
     </CreationScheme>
     <DeletionScheme id="CHA-32" name="delete" width="800" label="delete" height="600" userID="CHA" flexoID="32">
       <BehaviourControlGraph_EmptyControlGraph id="CHA-31" userID="CHA" flexoID="31" />
@@ -76,7 +97,9 @@
         <AssignableAction_ExpressionAction id="CHA-58" expression="&quot;[root]&quot;" userID="CHA" flexoID="58" />
       </ControlGraph2_AssignationAction>
       <ControlGraph1_AssignationAction id="CHA-57" assign="root" ownerContext="controlGraph1" userID="CHA" flexoID="57">
-        <AssignableAction_AddFlexoConceptInstance id="CHA-56" container="this" creationSchemeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory.create" receiver="this" userID="CHA" flexoID="56" />
+        <AssignableAction_AddFlexoConceptInstance id="CHA-56" container="this" creationSchemeURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory.create" receiver="this" userID="CHA" flexoID="56">
+          <AddFlexoConceptInstanceParameter id="CHA-145" paramName="parent" value="null" userID="CHA" flexoID="145" />
+        </AssignableAction_AddFlexoConceptInstance>
       </ControlGraph1_AssignationAction>
     </BehaviourControlGraph_Sequence>
   </CreationScheme>

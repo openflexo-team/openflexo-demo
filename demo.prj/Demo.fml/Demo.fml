@@ -12,7 +12,7 @@ public class Demo {
 
   @CreationScheme  
   Demo:create() {  
-    root = Directory.create();    
+    root = Directory.create(null);    
     root.name = "[root]";  
   }  
 
@@ -25,13 +25,10 @@ public class Demo {
   @FlexoConcept  
   public class Directory extends Element  {  
   
-    @FlexoConceptInstanceRole(cardinality=ZeroMany,readOnly=false)    
-    public List<FlexoConceptInstanceType<Element>> children;  
-  
     @CreationScheme    
-    Directory:create() {    
+    Directory:create(FlexoConceptInstanceType<Directory> parent) {    
       name = "newDirectory";      
-      children = new ArrayList<FlexoConceptInstance>();    
+      parent = parameters.parent;    
     }    
   
     @DeletionScheme    
@@ -41,22 +38,27 @@ public class Demo {
   
     @ActionScheme    
     public FlexoConceptInstanceType<File> addFile() {    
-      FlexoConceptInstanceType<File> result = File.create();      
-      children.add(result)      
+      FlexoConceptInstanceType<File> result = File.create(this);      
+      this.firePropertyChange getChildren()      
       return result;    
     }    
   
     @ActionScheme    
     public FlexoConceptInstanceType<Directory> addDirectory() {    
-      FlexoConceptInstanceType<Directory> result = Directory.create();      
-      children.add(result)      
+      FlexoConceptInstanceType<Directory> result = Directory.create(this);      
+      this.firePropertyChange getChildren()      
       return result;    
     }    
   
     @ActionScheme    
     public Void deleteElement(FlexoConceptInstanceType<Element> element) {    
-      children.remove(parameters.element)      
-      delete parameters.element    
+      delete parameters.element      
+      this.firePropertyChange getChildren()    
+    }    
+  
+    @ActionScheme    
+    List<FlexoConceptInstanceType<Element>> getChildren() {    
+      return container.SelectFlexoConceptInstance(type=Element,where=where=(selected.parent = this));    
     }    
   
   }  
@@ -66,6 +68,14 @@ public class Demo {
   
     @PrimitiveRole(cardinality=ZeroOne,readOnly=false)    
     public String name;  
+    @FlexoConceptInstanceRole(cardinality=One,readOnly=false)    
+    public FlexoConceptInstanceType<Directory> parent;  
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
   }  
 
   @FlexoConcept  
@@ -75,8 +85,9 @@ public class Demo {
     public String icon;  
   
     @CreationScheme    
-    File:create() {    
-      name = "newFile";    
+    File:create(FlexoConceptInstanceType<Directory> parent) {    
+      name = "newFile";      
+      parent = parameters.parent;    
     }    
   
     @DeletionScheme    

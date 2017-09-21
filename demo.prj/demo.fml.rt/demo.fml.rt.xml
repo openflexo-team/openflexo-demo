@@ -2,11 +2,14 @@
 <FMLRTVirtualModelInstance id="0" virtualModelURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml" modelVersion="1.0" title="demo" version="0.1" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml" userID="CHA" flexoID="1">
   <FlexoConceptInstance id="1" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory" userID="CHA" flexoID="2">
     <PrimitiveActorReference id="2" valueAsString="[root]" roleName="name" userID="CHA" flexoID="3" />
-    <ModelObjectActorReference id="3" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_8" roleName="children" userID="CHA" flexoID="9" />
-    <ModelObjectActorReference id="4" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_8" roleName="children" userID="CHA" flexoID="10" />
   </FlexoConceptInstance>
-  <FlexoConceptInstance id="5" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File" userID="CHA" flexoID="8">
-    <PrimitiveActorReference id="6" valueAsString="newFile" roleName="name" userID="CHA" flexoID="11" />
+  <FlexoConceptInstance id="3" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory" userID="CHA" flexoID="5">
+    <PrimitiveActorReference id="4" valueAsString="newDirectory" roleName="name" userID="CHA" flexoID="6" />
+    <ModelObjectActorReference id="5" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_2" roleName="parent" userID="CHA" flexoID="7" />
   </FlexoConceptInstance>
-  <ModelObjectActorReference id="7" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_2" roleName="root" userID="CHA" flexoID="4" />
+  <FlexoConceptInstance id="6" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory" userID="CHA" flexoID="10">
+    <PrimitiveActorReference id="7" valueAsString="newDirectory" roleName="name" userID="CHA" flexoID="8" />
+    <ModelObjectActorReference id="8" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_2" roleName="parent" userID="CHA" flexoID="9" />
+  </FlexoConceptInstance>
+  <ModelObjectActorReference id="9" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_2" roleName="root" userID="CHA" flexoID="4" />
 </FMLRTVirtualModelInstance>
