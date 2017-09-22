@@ -30,58 +30,52 @@ dependencies {
 
 def appDir = file(buildDir.canonicalPath + "/app");
 
-task cleanApp(group: "deployement" ) {
-    doLast {
-        if (appDir.exists()) {
-            appDir.deleteDir();
-        }
-    }
-}
-
-task copyProject(type: Copy, group: "deployement") {
-    from "demo.prj"
-    into appDir.canonicalPath + "/demo.prj"
-}
-
-
-task copyBinary(type: Copy, group: "deployement") {
-    from "deploy"
-    into appDir.canonicalPath
-}
-
-task copyWebResources(type: Copy, group: "deployement") {
-    from "webroot"
-    into appDir.canonicalPath + "/webroot"
-}
-
-task copyJars (type: Copy, group: "deployement") {
-    from configurations.runtime.resolve()
-    into appDir.canonicalPath + "/libs"
-}
-
-task sync (type: Sync, group: "deployement") {
-    from appDir.canonicalPath
-    into destination
-}
-
-task copy (dependsOn: [
-        "cleanApp", "assemble", "copyJars", "copyProject",
-        "copyBinary", "copyWebResources"
-    ], group: "deployement") {
-}
-
 task stopApp(type: Exec, group: "deployement") {
     commandLine "./stop.sh"
     workingDir destination
 }
 
-task startApp(type: Exec, group: "deployement") {
+task cleanApp(dependsOn: "stopApp", group: "deployement" ) << {
+    if (appDir.exists()) {
+        appDir.deleteDir();
+    }
+}
+
+task copyFiles(dependsOn: ["assemble", "cleanApp"], group: "deployement") << {
+    // copy jars into libs
+    copy {
+        from configurations.runtime.resolve()
+        into appDir.canonicalPath + "/libs"
+    }
+    // copy all web resources into webroot
+    copy {
+        from "webroot"
+        into appDir.canonicalPath + "/webroot"
+    }
+    // copy start scripts
+    copy {
+        from "deploy"
+        into appDir.canonicalPath
+    }
+    // copy project
+    copy {
+        from "demo.prj"
+        into appDir.canonicalPath + "/demo.prj"
+    }
+}
+
+task sync (type: Sync, dependsOn: "copyFiles", group: "deployement") {
+    from appDir.canonicalPath
+    into destination
+}
+
+task startApp(type: Exec, dependsOn: "sync", group: "deployement") {
     commandLine "./start.sh"
     workingDir destination
 }
 
 task deploy (
-    dependsOn: ["copy", "stopApp", "sync", "startApp"],
+    dependsOn: ["startApp"],
     group: "deployement"
 ) {
 }
