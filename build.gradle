@@ -33,9 +33,10 @@ def appDir = file(buildDir.canonicalPath + "/app");
 task stopApp(type: Exec, group: "deployement") {
     commandLine "./stop.sh"
     workingDir destination
+    ignoreExitValue true
 }
 
-task cleanApp(dependsOn: "stopApp", group: "deployement" ) << {
+task cleanApp(/*dependsOn: "stopApp",*/ group: "deployement" ) << {
     if (appDir.exists()) {
         appDir.deleteDir();
     }
@@ -62,6 +63,7 @@ task copyFiles(dependsOn: ["assemble", "cleanApp"], group: "deployement") << {
         from "demo.prj"
         into appDir.canonicalPath + "/demo.prj"
     }
+    file(appDir.canonicalPath + "/logs").mkdir()
 }
 
 task sync (type: Sync, dependsOn: "copyFiles", group: "deployement") {
