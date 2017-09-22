@@ -12,5 +12,10 @@ The icons are selected from the [Material icons](https://material.io/icons), jus
  
 The data of the tree is shared with all clients and **synchronized** with each change.
 
-Come see us at [openflexoorg]()http://openflexo.org).
+Come see us at [openflexoorg](http://openflexo.org).
 
+## Getting started
+
+## Notes
+
+The server logs are visible [here](https://server.openflexo.org/logs.html).

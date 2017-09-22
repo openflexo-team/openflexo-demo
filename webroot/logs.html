@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+
+    <script src="/modules/material-design-lite/material.min.js"></script>
+</head>
+<body class="mdl-base">
+  <h1>Logs</h1>
+
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+      <button id="down" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">arrow_downward</i>
+      </button>
+    </div>
+    <div class="mdl-cell mdl-cell--12-col">
+      <code id="logs"></code>
+    </div>
+    <div class="mdl-cell mdl-cell-12-col">
+      <button id="refresh" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">refresh</i>
+      </button>
+      <button id="up" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">arrow_upward</i>
+      </button>
+    </div>
+  <div>
+  <script data-main="js/logs.js" src="/modules/requirejs/require.js"></script>
+</body>
+</html>
