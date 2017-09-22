@@ -36,7 +36,7 @@ task stopApp(type: Exec, group: "deployement") {
     ignoreExitValue true
 }
 
-task cleanApp(/*dependsOn: "stopApp",*/ group: "deployement" ) << {
+task cleanApp(dependsOn: "stopApp", group: "deployement" ) << {
     if (appDir.exists()) {
         appDir.deleteDir();
     }
