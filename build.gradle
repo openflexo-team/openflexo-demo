@@ -1,9 +1,10 @@
 group 'org.openflexo.demo'
 version '1.0-SNAPSHOT'
 
+
 buildscript {
     ext.openflexo_version = '1.9.0-SNAPSHOT'
-    ext.destination = "/home/openflexoserver"
+    ext.destination = System.getProperty("DEST") != null ? System.getProperty("DEST") : "/home/openflexoserver"
 }
 
 apply plugin: 'java'
@@ -30,43 +31,55 @@ dependencies {
 
 def appDir = file(buildDir.canonicalPath + "/app");
 
-task cleanApp(group: "deployement" ) << {
+task stopApp(type: Exec, group: "deployement") {
+    workingDir destination
+    commandLine "./stop.sh"
+}
+
+task cleanApp(dependsOn: ["stopApp", "assemble"], group: "deployement") << {
     if (appDir.exists()) {
         appDir.deleteDir();
     }
 }
 
-task copyFiles(dependsOn: ["assemble", "cleanApp"], group: "deployement") << {
-    // copy jars into libs
-    copy {
-        from configurations.runtime.resolve()
-        into appDir.canonicalPath + "/libs"
+task copyFiles(dependsOn: ["assemble", "cleanApp"], group: "deployement") {
+    doLast {
+        // copy jars into libs
+        copy {
+            from configurations.runtime.resolve()
+            into appDir.canonicalPath + "/libs"
+        }
+        // copy all web resources into webroot
+        copy {
+            from "webroot"
+            into appDir.canonicalPath + "/webroot"
+        }
+        // copy start scripts
+        copy {
+            from "deploy"
+            into appDir.canonicalPath
+        }
+        // copy project
+        copy {
+            from "demo.prj"
+            into appDir.canonicalPath + "/demo.prj"
+        }
+        file(appDir.canonicalPath + "/logs").mkdir()
     }
-    // copy all web resources into webroot
-    copy {
-        from "webroot"
-        into appDir.canonicalPath + "/webroot"
-    }
-    // copy start scripts
-    copy {
-        from "deploy"
-        into appDir.canonicalPath
-    }
-    // copy project
-    copy {
-        from "demo.prj"
-        into appDir.canonicalPath + "/demo.prj"
-    }
-    file(appDir.canonicalPath + "/logs").mkdir()
 }
 
-task sync (type: Sync, dependsOn: "copyFiles", group: "deployement") {
+task sync(type: Sync, dependsOn: "copyFiles", group: "deployement") {
     from appDir.canonicalPath
     into destination
 }
 
+task startApp(type: Exec, dependsOn: "sync", group: "deployement") {
+    workingDir destination
+    commandLine './start.sh'
+}
+
 task deploy (
-    dependsOn: ["sync"],
+    dependsOn: ["startApp"],
     group: "deployement"
 ) {
 }
