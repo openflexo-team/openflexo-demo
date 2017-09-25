@@ -1,0 +1,21 @@
+use org.openflexo.technologyadapter.gina.FIBComponentModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/DemoUI.fml")
+public class DemoUI {
+
+  @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)  
+  public FlexoConceptInstanceType<NotFound:null> data;
+  @FIBComponentModelSlot(cardinality=ZeroOne,readOnly=false)  
+  public GINAFIBComponent ui;
+
+  @CreationScheme  
+  DemoUI:init(VirtualModelInstanceType<Demo> data) {  
+    ui = ui.ConfigureGINAFIBComponent();    
+    data = parameters.data;  
+  }  
+
+}

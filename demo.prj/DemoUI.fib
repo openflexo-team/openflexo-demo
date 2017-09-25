@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GINAFIBComponent id="0" userID="CHA" flexoID="1">
+  <Panel id="1" align="left" borderTop="0" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="empty" sizeAdjustment="OriginalSize" layout="border" borderRight="0" data="data" name="rootPanel">
+    <TabPanel id="2" constraints="border(location=center)" height="60" width="100" name="rootTabPanel">
+      <Tab id="3" title="Tab" align="left" borderTop="0" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="empty" sizeAdjustment="OriginalSize" layout="twocols" borderRight="0" name="tab1">
+        <Label id="4" label="label" align="left" data="(&quot;Size &quot; + data.root.getChildren().size)" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=left)" name="label1" />
+        <TextField id="5" columns="7" data="data.root.name" constraints="twocols(expandHorizontally=true;expandVertically=false;insetsBottom=0;insetsLeft=0;insetsRight=0;insetsTop=0;location=right)" name="textField1" />
+      </Tab>
+    </TabPanel>
+    <FIBVariable id="6" type="org.openflexo.foundation.fml.VirtualModelInstanceType&lt;http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml&gt;" value="data" name="data" />
+  </Panel>
+</GINAFIBComponent>

@@ -1,0 +1,7 @@
+#Metadata for directory demo.prj/DemoUI.fml
+#Mon Sep 25 16:06:45 CEST 2017
+DemoUI.fml.xml.name=DemoUI
+DemoUI.fml.xml.uri=http\://www.openflexo.org/projects/2017/9/Untitled_1505918219989/DemoUI.fml
+DemoUI.fml.xml.modelVersion=2.0
+DemoUI.fml.xml.requiredModelSlotList=org.openflexo.technologyadapter.gina.FIBComponentModelSlot
+DemoUI.fml.xml.version=0.1

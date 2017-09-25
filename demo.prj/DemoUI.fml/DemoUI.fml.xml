@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="CHA-2" modelVersion="2.0" uri="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/DemoUI.fml" version="0.1" name="DemoUI" userID="CHA" flexoID="2">
+  <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.technologyadapter.gina.FIBComponentModelSlot" userID="CHA" flexoID="-1" />
+  <Inspector id="CHA-1" inspectorTitle="DemoUI" userID="CHA" flexoID="1" />
+  <FlexoConceptInstanceRole id="CHA-4" virtualModelInstance="this" cloningStrategy="Reference" cardinality="ZeroOne" name="data" userID="CHA" flexoID="4" />
+  <FIBComponentModelSlot id="CHA-5" templateComponentURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/DemoUI.fib" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="ui" userID="CHA" flexoID="5">
+    <VariableAssignment id="CHA-15" variableType="org.openflexo.foundation.fml.VirtualModelInstanceType&lt;http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml&gt;" variable="data" value="data" userID="CHA" flexoID="15" />
+  </FIBComponentModelSlot>
+  <CreationScheme id="CHA-3" name="init" width="800" label="init" height="600" userID="CHA" flexoID="3">
+    <BehaviourControlGraph_Sequence id="CHA-13" userID="CHA" flexoID="13">
+      <ControlGraph2_AssignationAction id="CHA-10" assign="data" ownerContext="controlGraph2" name="assign" userID="CHA" flexoID="10">
+        <AssignableAction_ExpressionAction id="CHA-9" expression="parameters.data" userID="CHA" flexoID="9" />
+      </ControlGraph2_AssignationAction>
+      <ControlGraph1_AssignationAction id="CHA-12" assign="ui" ownerContext="controlGraph1" userID="CHA" flexoID="12">
+        <AssignableAction_ConfigureGINAFIBComponent id="CHA-11" receiver="ui" userID="CHA" flexoID="11" />
+      </ControlGraph1_AssignationAction>
+    </BehaviourControlGraph_Sequence>
+    <GenericBehaviourParameter id="CHA-14" container="this" widget="CUSTOM_WIDGET" name="data" type="org.openflexo.foundation.fml.VirtualModelInstanceType&lt;http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml&gt;" userID="CHA" flexoID="14" />
+  </CreationScheme>
+</VirtualModel>
