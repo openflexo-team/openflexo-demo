@@ -77,9 +77,3 @@ task startApp(type: Exec, dependsOn: "sync", group: "deployement") {
     workingDir destination
     commandLine './start.sh'
 }
-
-task deploy (
-    dependsOn: ["startApp"],
-    group: "deployement"
-) {
-}
