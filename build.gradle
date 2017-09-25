@@ -36,13 +36,15 @@ task stopApp(type: Exec, group: "deployement") {
     commandLine "./stop.sh"
 }
 
-task cleanApp(dependsOn: ["stopApp", "assemble"], group: "deployement") << {
-    if (appDir.exists()) {
-        appDir.deleteDir();
+task cleanApp(dependsOn: ["stopApp", "assemble"], group: "deployement") {
+    doLast {
+        if (appDir.exists()) {
+            appDir.deleteDir();
+        }
     }
 }
 
-task copyFiles(dependsOn: ["assemble", "cleanApp"], group: "deployement") {
+task copyFiles(dependsOn: "cleanApp", group: "deployement") {
     doLast {
         // copy jars into libs
         copy {
