@@ -3,6 +3,9 @@
 PIDFILE=server.pid
 LOGFILE=server.log
 
-echo "Starting server"
+echo "Starting server from $PWD"
+cd $PWD
 
-nohup java -cp `find libs | xargs | sed "s/ /:/g"` org.openflexo.http.server.OpenFlexoServer --port 9300 --project demo.prj > logs/server.log 2>&1 & echo $! > $PIDFILE
+nohup \
+    java -cp `find libs | xargs | sed "s/ /:/g"` org.openflexo.http.server.OpenFlexoServer --port 9300 --project demo.prj > logs/server.log 2>&1 & \
+    echo $! > $PIDFILE
