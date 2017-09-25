@@ -4,12 +4,56 @@
     <PrimitiveActorReference id="2" valueAsString="[root]" roleName="name" userID="CHA" flexoID="3" />
   </FlexoConceptInstance>
   <FlexoConceptInstance id="3" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory" userID="CHA" flexoID="5">
-    <PrimitiveActorReference id="4" valueAsString="newDirectory" roleName="name" userID="CHA" flexoID="6" />
+    <PrimitiveActorReference id="4" valueAsString="Vu" roleName="name" userID="CHA" flexoID="6" />
     <ModelObjectActorReference id="5" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_2" roleName="parent" userID="CHA" flexoID="7" />
   </FlexoConceptInstance>
   <FlexoConceptInstance id="6" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory" userID="CHA" flexoID="10">
-    <PrimitiveActorReference id="7" valueAsString="newDirectory" roleName="name" userID="CHA" flexoID="8" />
+    <PrimitiveActorReference id="7" valueAsString="A regarder" roleName="name" userID="CHA" flexoID="8" />
     <ModelObjectActorReference id="8" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_2" roleName="parent" userID="CHA" flexoID="9" />
   </FlexoConceptInstance>
-  <ModelObjectActorReference id="9" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_2" roleName="root" userID="CHA" flexoID="4" />
+  <FlexoConceptInstance id="9" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File" userID="FLX" flexoID="18">
+    <PrimitiveActorReference id="10" valueAsString="prout" roleName="name" userID="FLX" flexoID="19" />
+    <PrimitiveActorReference id="11" valueAsString="android" roleName="icon" userID="FLX" flexoID="20" />
+    <ModelObjectActorReference id="12" roleName="parent" userID="FLX" flexoID="21" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="13" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File" userID="FLX" flexoID="26">
+    <PrimitiveActorReference id="14" valueAsString="newFile" roleName="name" userID="FLX" flexoID="27" />
+    <PrimitiveActorReference id="15" valueAsString="portrait" roleName="icon" userID="FLX" flexoID="28" />
+    <ModelObjectActorReference id="16" roleName="parent" userID="FLX" flexoID="29" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="17" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File" userID="FLX" flexoID="33">
+    <PrimitiveActorReference id="18" valueAsString="Une bonne idee" roleName="name" userID="FLX" flexoID="34" />
+    <PrimitiveActorReference id="19" valueAsString="star" roleName="icon" userID="FLX" flexoID="35" />
+    <ModelObjectActorReference id="20" roleName="parent" userID="FLX" flexoID="36" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="21" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#Directory" userID="FLX" flexoID="37">
+    <PrimitiveActorReference id="22" valueAsString="Edgar Wright" roleName="name" userID="FLX" flexoID="38" />
+    <ModelObjectActorReference id="23" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_10" roleName="parent" userID="FLX" flexoID="39" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="24" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File" userID="FLX" flexoID="40">
+    <PrimitiveActorReference id="25" valueAsString="Hot Fuzz" roleName="name" userID="FLX" flexoID="41" />
+    <PrimitiveActorReference id="26" valueAsString="alarm" roleName="icon" userID="FLX" flexoID="42" />
+    <ModelObjectActorReference id="27" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#FLX_37" roleName="parent" userID="FLX" flexoID="43" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="28" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File" userID="FLX" flexoID="44">
+    <PrimitiveActorReference id="29" valueAsString="World's End Pub" roleName="name" userID="FLX" flexoID="45" />
+    <PrimitiveActorReference id="30" valueAsString="local_drink" roleName="icon" userID="FLX" flexoID="46" />
+    <ModelObjectActorReference id="31" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#FLX_37" roleName="parent" userID="FLX" flexoID="47" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="32" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File" userID="FLX" flexoID="48">
+    <PrimitiveActorReference id="33" valueAsString="Shaun of the dead" roleName="name" userID="FLX" flexoID="49" />
+    <PrimitiveActorReference id="34" valueAsString="pets" roleName="icon" userID="FLX" flexoID="50" />
+    <ModelObjectActorReference id="35" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#FLX_37" roleName="parent" userID="FLX" flexoID="51" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="36" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File" userID="FLX" flexoID="52">
+    <PrimitiveActorReference id="37" valueAsString="Baby Driver" roleName="name" userID="FLX" flexoID="53" />
+    <PrimitiveActorReference id="38" valueAsString="local_taxi" roleName="icon" userID="FLX" flexoID="54" />
+    <ModelObjectActorReference id="39" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#FLX_37" roleName="parent" userID="FLX" flexoID="55" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="40" flexoConceptURI="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/Demo.fml#File" userID="FLX" flexoID="56">
+    <PrimitiveActorReference id="41" valueAsString="La fille de Brest" roleName="name" userID="FLX" flexoID="57" />
+    <PrimitiveActorReference id="42" valueAsString="local_hospital" roleName="icon" userID="FLX" flexoID="58" />
+    <ModelObjectActorReference id="43" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_5" roleName="parent" userID="FLX" flexoID="59" />
+  </FlexoConceptInstance>
+  <ModelObjectActorReference id="44" objectReference="http://www.openflexo.org/projects/2017/9/Untitled_1505918219989/demo.fml.rt#CHA_2" roleName="root" userID="CHA" flexoID="4" />
 </FMLRTVirtualModelInstance>
