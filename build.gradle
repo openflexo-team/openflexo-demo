@@ -78,4 +78,5 @@ task sync(type: Sync, dependsOn: "copyFiles", group: "deployement") {
 task startApp(type: Exec, dependsOn: "sync", group: "deployement") {
     workingDir destination
     commandLine './start.sh'
+    environment("BUILD_ID", "dontKillMe")
 }
