@@ -10,6 +10,7 @@ import { Grid, GridCell } from "../openflexo/ui/Grid";
 import { Tree, TreeItem } from "../openflexo/ui/Tree";
 import { Tabs, Tab } from "../openflexo/ui/Tabs";
 import { Icon } from "../openflexo/ui/Icon";
+import { Button } from "../openflexo/ui/Button";
 
 import { BoundTextField } from "../openflexo/mvc/BoundTextField"
 import { BoundButton } from "../openflexo/mvc/BoundButton"
@@ -44,7 +45,7 @@ export class Application implements AppContext {
     private readonly elementUrl = "/ta/fml/model/aHR0cDovL3d3dy5vcGVuZmxleG8ub3JnL3Byb2plY3RzLzIwMTcvOS9VbnRpdGxlZF8xNTA1OTE4MjE5OTg5L0RlbW8uZm1s/object/21";
     private readonly fileUrl = "/ta/fml/model/aHR0cDovL3d3dy5vcGVuZmxleG8ub3JnL3Byb2plY3RzLzIwMTcvOS9VbnRpdGxlZF8xNTA1OTE4MjE5OTg5L0RlbW8uZm1s/object/33";
     private readonly directoryUrl = "/ta/fml/model/aHR0cDovL3d3dy5vcGVuZmxleG8ub3JnL3Byb2plY3RzLzIwMTcvOS9VbnRpdGxlZF8xNTA1OTE4MjE5OTg5L0RlbW8uZm1s/object/11";
-    
+
     private readonly rootUrl = "/ta/fmlrt/instance/aHR0cDovL3d3dy5vcGVuZmxleG8ub3JnL3Byb2plY3RzLzIwMTcvOS9VbnRpdGxlZF8xNTA1OTE4MjE5OTg5L2RlbW8uZm1sLnJ0/object/2";
 
     public api: Api = new Api();
@@ -67,13 +68,13 @@ export class Application implements AppContext {
         console.log("Starting Demo app");
         addCssIfNotAlreadyPresent("css/demo.css");
         addCssIfNotAlreadyPresent("css/openflexo.css");
-        
+
         addMdlCssIfNotAlreadyPresent();
-        
-        const root = document.querySelector("#root");  
-        if (root) {      
-            let files = this.createFilesGrid();
-            root.appendChild(files.container);
+
+        const root = document.querySelector("#root");
+        if (root) {
+            root.appendChild(this.createFilesGrid().container);
+            //root.appendChild(this.createFib().container)
         }
 
         this.snackbarContainer = <MdlSnackbar>document.querySelector("#snackbar");
@@ -81,10 +82,10 @@ export class Application implements AppContext {
     }
 
     createButton(icon: string, expression: string, model: string, enable: string|null = null): BoundButton {
-        return new BoundButton(this.api, 
+        return new BoundButton(this.api,
             new Icon(icon),
             createBinding(expression, model),
-            model, 
+            model,
             enable !== null ? createBinding(enable, model) : null,
             "icon")
     }
@@ -93,11 +94,11 @@ export class Application implements AppContext {
         const grid = new Grid();
 
         let modelUrl = this.rootUrl;
-        
+
         let elements = [
             new BoundTreeElement(
-                "Directory", 
-                (value) => value.flexoConcept.name === "Directory", 
+                "Directory",
+                (value) => value.flexoConcept.name === "Directory",
                 (api, value: any) => new Flow(
                         new Icon("folder"),
                         new BoundLabel(api, createBinding("name", value.url), value.url)
@@ -111,9 +112,9 @@ export class Application implements AppContext {
                     new BoundIcon(api, createBinding("icon", value.url), value.url),
                     new BoundLabel(api, createBinding("name", value.url), value.url)
                 )
-            )  
+            )
         ];
-        
+
         let boundTree = new BoundTree(this.api, createRuntimeBinding("this", modelUrl, modelUrl), elements);
         grid.addCell(new GridCell(boundTree, 5));
 
@@ -121,40 +122,31 @@ export class Application implements AppContext {
         grid.addCell(new GridCell(gridForm, 7));
 
         let nameTextField = new BoundTextField(this.api, createBinding("name", this.elementUrl), "Nom", null, true);
-        gridForm.addCell(new GridCell(nameTextField, 12))            
-        
+        gridForm.addCell(new GridCell(nameTextField, 12))
+
         let iconTextField = new BoundTextField(this.api, createBinding("icon", this.fileUrl), "icon", null, true);
-        gridForm.addCell(new GridCell(iconTextField, 12))            
-        
+        iconTextField.visible = createBinding('this.flexoConcept.name = "File"', modelUrl);
+        gridForm.addCell(new GridCell(iconTextField, 12))
+
         let addDirectoryButton = this.createButton("folder", "this.addDirectory()", modelUrl);
+        addDirectoryButton.visible = createBinding('this.flexoConcept.name = "Directory"', modelUrl);
         grid.addCell(new GridCell(addDirectoryButton, 1));
 
-        let addFileButton = this.createButton("portrait", "this.addFile()", modelUrl); 
+        let addFileButton = this.createButton("portrait", "this.addFile()", modelUrl);
+        addFileButton.visible = createBinding('this.flexoConcept.name = "Directory"', modelUrl);
         grid.addCell(new GridCell(addFileButton, 1));
 
         let deleteButton = this.createButton("delete", "parent.deleteElement(this)", modelUrl);
         grid.addCell(new GridCell(deleteButton, 1));
-        
+
         boundTree.onselect = (selection) => {
             if (selection.size === 1) {
                 selection.forEach(item => {
-                    let instance = <FlexoConceptInstance>item.object;
                     let url = item.object.url;
                     nameTextField.updateRuntime(url);
-
-                    deleteButton.updateRuntime(url);   
-                    switch (instance.flexoConcept.name) {
-                        case "File": 
-                            iconTextField.updateRuntime(url);
-                            addDirectoryButton.updateRuntime(null);
-                            addFileButton.updateRuntime(null);
-                            break;
-                        case "Directory": 
-                            iconTextField.updateRuntime(null);
-                            addDirectoryButton.updateRuntime(url);
-                            addFileButton.updateRuntime(url);     
-                            break;
-                    }
+                    iconTextField.updateRuntime(url);
+                    addDirectoryButton.updateRuntime(url);
+                    addFileButton.updateRuntime(url);
                 });
             } else {
                 nameTextField.updateRuntime(null);
@@ -164,7 +156,13 @@ export class Application implements AppContext {
                 deleteButton.updateRuntime(null);
             }
         };
-    
+
         return grid;
     }
+/*
+    createFib(): Component {
+      let url = "/ta/gina/fib/aHR0cDovL3d3dy5vcGVuZmxleG8ub3JnL3Byb2plY3RzLzIwMTcvOS9VbnRpdGxlZF8xNTA1OTE4MjE5OTg5L0RlbW9VSS5maWI/object/1";
+      //this.api.call<>
+    }
+*/
 }
