@@ -21,6 +21,11 @@ public class Demo {
   
   }  
 
+  @ActionScheme  
+  List<FlexoConceptInstanceType<Element>> allElements() {  
+    return this.SelectFlexoConceptInstance(type=Element);  
+  }  
+
 
   @FlexoConcept  
   public class Directory extends Element  {  
@@ -40,6 +45,7 @@ public class Demo {
     public FlexoConceptInstanceType<File> addFile() {    
       FlexoConceptInstanceType<File> result = File.create(this);      
       this.firePropertyChange getChildren()      
+      container.firePropertyChange allElements()      
       return result;    
     }    
   
@@ -47,13 +53,15 @@ public class Demo {
     public FlexoConceptInstanceType<Directory> addDirectory() {    
       FlexoConceptInstanceType<Directory> result = Directory.create(this);      
       this.firePropertyChange getChildren()      
+      container.firePropertyChange allElements()      
       return result;    
     }    
   
     @ActionScheme    
     public Void deleteElement(FlexoConceptInstanceType<Element> element) {    
       delete parameters.element      
-      this.firePropertyChange getChildren()    
+      this.firePropertyChange getChildren()      
+      container.firePropertyChange allElements()    
     }    
   
     @ActionScheme    
