@@ -1,5 +1,6 @@
 import { Api, Log, createRuntimeBinding, createBinding, BindingId } from "../openflexo/api/Api";
 
+import { Icon } from "../openflexo/ui/Icon"
 import { Tab } from "../openflexo/ui/Tabs"
 import { Flow } from "../openflexo/ui/Flow"
 import { Grid, GridCell } from "../openflexo/ui/Grid"
@@ -8,6 +9,7 @@ import { BoundTextField } from "../openflexo/mvc/BoundTextField"
 import { BoundLabel } from "../openflexo/mvc/BoundLabel"
 import { BoundIcon } from "../openflexo/mvc/BoundIcon"
 import { BoundTable, BoundColumn } from "../openflexo/mvc/BoundTable"
+import { BoundButton } from "../openflexo/mvc/BoundButton"
 
 import { AppContext } from "./App"
 
@@ -57,10 +59,16 @@ export class TableTab {
         new BoundColumn(
             "Name",
             (api, element) => new BoundTextField(api, createBinding("name", element.url), "Name", element.url, false)
+        ),
+        new BoundColumn(
+            "Delete",
+            (api, element) => new BoundButton(api, new Icon("delete"),
+                createBinding("parent.deleteElement(this)", element.url),
+                element.url, null,   "icon")
         )
 
     ];
-    let binding = createBinding("this.flexoConceptInstances", this.context.modelUrl);
+    let binding = createBinding("this.allElements()", this.context.modelUrl);
     const table = new BoundTable(this.context.api, binding, columns);
     table.updateRuntime(this.context.modelUrl);
     grid.addCell(new GridCell(table, 12));
