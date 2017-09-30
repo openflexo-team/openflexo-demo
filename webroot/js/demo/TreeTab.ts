@@ -33,6 +33,18 @@ export class TreeTab {
   public createTab(): Tab {
       const grid = new Grid();
 
+      grid.addCell(new GridCell("", 2));
+      grid.addCell(new GridCell(`<p>
+        The tree bellow presents a set of directories and files.
+        When selecting a element, you can change it's name in the <b>Name</b> text field.
+        For directories, you can add children directories pressing the button <i class="material-icons">folder</i>
+        or files with <i class="material-icons">portrait</i>.
+        When selecting a file, the <b>Icon</b> text field allows to change the file icon.
+        The icons are selected from the <a href="https://material.io/icons/">Material icons</a>, just put the name to get the icon.
+        The data of the tree is shared with all clients and <b>synchronized</b> with each change.
+      </p>`, 8))
+      grid.addCell(new GridCell("", 2));
+      
       let modelUrl = this.context.rootUrl;
 
       let elements = [
@@ -56,16 +68,6 @@ export class TreeTab {
       ];
 
       let boundTree = new BoundTree(this.context.api, createRuntimeBinding("this", modelUrl, modelUrl), elements);
-      grid.addCell(new GridCell("", 2));
-      grid.addCell(new GridCell(`<p>
-        The tree bellow presents a set of directories and files.
-        When selecting a element, you can change it's name in the <b>Name</b> text field.
-        For directories, you can add children directories pressing the button <i class="material-icons">folder</i>
-        or files with <i class="material-icons">portrait</i>.
-        When selecting a file, the <b>Icon</b> text field allows to change the file icon.
-        The icons are selected from the <a href="https://material.io/icons/">Material icons</a>, just put the name to get the icon.
-        The data of the tree is shared with all clients and <b>synchronized</b> with each change.
-      </p>`, 8))
       grid.addCell(new GridCell(boundTree, 5));
 
       let gridForm = new Grid();
