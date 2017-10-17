@@ -22,12 +22,7 @@ export class TreeTab {
   ) {  }
 
   createButton(icon: string, expression: string, model: string, enable: string|null = null): BoundButton {
-      return new BoundButton(this.context.api,
-          new Icon(icon),
-          createBinding(expression, model),
-          model,
-          enable !== null ? createBinding(enable, model) : null,
-          "icon")
+      return new BoundButton(this.context.api, new Icon(icon), expression, model, enable, "icon");
   }
 
   public createTab(): Tab {
@@ -44,7 +39,7 @@ export class TreeTab {
         The data of the tree is shared with all clients and <b>synchronized</b> with each change.
       </p>`, 8))
       grid.addCell(new GridCell("", 2));
-      
+
       let modelUrl = this.context.rootUrl;
 
       let elements = [
@@ -53,39 +48,39 @@ export class TreeTab {
               (value) => value.flexoConcept.name === "Directory",
               (api, value: any) => new Flow(
                       new Icon("folder"),
-                      new BoundLabel(api, createBinding("name", value.url), value.url)
+                      new BoundLabel(api, "name", value.url)
                   ),
-              (value: Description<any>) => new BindingId("this.getChildren()", value.url),
+              (value: Description<any>) => "this.getChildren()",
           ),
           new BoundTreeElement(
               "File",
               (value) => value.flexoConcept.name === "File",
               (api: Api, value: any ) => new Flow(
-                  new BoundIcon(api, createBinding("icon", value.url), value.url),
-                  new BoundLabel(api, createBinding("name", value.url), value.url)
+                  new BoundIcon(api, "icon", value.url),
+                  new BoundLabel(api, "name", value.url)
               )
           )
       ];
 
-      let boundTree = new BoundTree(this.context.api, createRuntimeBinding("this", modelUrl, modelUrl), elements);
+      let boundTree = new BoundTree(this.context.api, modelUrl, elements);
       grid.addCell(new GridCell(boundTree, 5));
 
       let gridForm = new Grid();
       grid.addCell(new GridCell(gridForm, 7));
 
-      let nameTextField = new BoundTextField(this.context.api, createBinding("name", this.context.elementUrl), "Nom", null, true);
+      let nameTextField = new BoundTextField(this.context.api, "name", "Nom", null, true);
       gridForm.addCell(new GridCell(nameTextField, 12))
 
-      let iconTextField = new BoundTextField(this.context.api, createBinding("icon", this.context.fileUrl), "icon", null, true);
-      iconTextField.visible = createBinding('this.flexoConcept.name = "File"', modelUrl);
+      let iconTextField = new BoundTextField(this.context.api, "icon", "Icon", null, true);
+      iconTextField.visible = 'this.flexoConcept.name = "File"';
       gridForm.addCell(new GridCell(iconTextField, 12))
 
       let addDirectoryButton = this.createButton("folder", "this.addDirectory()", modelUrl);
-      addDirectoryButton.visible = createBinding('this.flexoConcept.name = "Directory"', modelUrl);
+      addDirectoryButton.visible = 'this.flexoConcept.name = "Directory"';
       grid.addCell(new GridCell(addDirectoryButton, 1));
 
       let addFileButton = this.createButton("portrait", "this.addFile()", modelUrl);
-      addFileButton.visible = createBinding('this.flexoConcept.name = "Directory"', modelUrl);
+      addFileButton.visible = 'this.flexoConcept.name = "Directory"';
       grid.addCell(new GridCell(addFileButton, 1));
 
       let deleteButton = this.createButton("delete", "parent.deleteElement(this)", modelUrl);

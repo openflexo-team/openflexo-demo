@@ -36,12 +36,12 @@ export class TableTab {
         new BoundColumn(
             "Info",
             (api, element) => {
-              let icon = new BoundIcon(api, createBinding("icon", element.url));
-              icon.visible = createBinding("this.flexoConcept.name = 'File'", element.url);
+              let icon = new BoundIcon(api, "icon");
+              icon.visible ="this.flexoConcept.name = 'File'";
               icon.updateRuntime(element.url);
 
-              let count = new BoundLabel(api, createBinding("this.getChildren().size()", element.url));
-              count.visible = createBinding("this.flexoConcept.name = 'Directory'", element.url);
+              let count = new BoundLabel(api, "this.getChildren().size()");
+              count.visible = "this.flexoConcept.name = 'Directory'";
               count.updateRuntime(element.url);
 
               return new Flow(icon, count);
@@ -50,26 +50,25 @@ export class TableTab {
         new BoundColumn(
             "Icon",
             (api, element) => {
-              let result = new BoundTextField(api, createBinding("icon", element.url));
-              result.visible = createBinding("this.flexoConcept.name = 'File'", element.url);
+              let result = new BoundTextField(api, "icon");
+              result.visible = "this.flexoConcept.name = 'File'";
               result.updateRuntime(element.url);
               return result;
             }
         ),
         new BoundColumn(
             "Name",
-            (api, element) => new BoundTextField(api, createBinding("name", element.url), "Name", element.url, false)
+            (api, element) => new BoundTextField(api, "name", "Name", element.url, false)
         ),
         new BoundColumn(
             "Delete",
             (api, element) => new BoundButton(api, new Icon("delete"),
-                createBinding("parent.deleteElement(this)", element.url),
+              "parent.deleteElement(this)",
                 element.url, null,   "icon")
         )
 
     ];
-    let binding = createBinding("this.allElements()", this.context.modelUrl);
-    const table = new BoundTable(this.context.api, binding, columns);
+    const table = new BoundTable(this.context.api, "this.allElements()", columns);
     table.updateRuntime(this.context.modelUrl);
     grid.addCell(new GridCell(table, 12));
 
