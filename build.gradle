@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 
 buildscript {
-    ext.openflexo_version = '1.9.0-SNAPSHOT'
+    ext.openflexo_version = '2.0.1-SNAPSHOT'
     ext.destination = System.getProperty("DEST") != null ? System.getProperty("DEST") : "/home/openflexoserver"
 }
 
@@ -22,7 +22,7 @@ dependencies {
     // set of connectors
     compile "org.openflexo:docxconnector:${openflexo_version}"
     compile "org.openflexo:excelconnector:${openflexo_version}"
-    compile "org.openflexo:pdfconnector:${openflexo_version}"
+    //compile "org.openflexo:pdfconnector:${openflexo_version}"
 
     compile "org.openflexo:gina-http:${openflexo_version}"
 
