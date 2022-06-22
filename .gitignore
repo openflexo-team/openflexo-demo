@@ -10,3 +10,4 @@
 .vertx/*
 .metadata
 logs/*
+/build/
